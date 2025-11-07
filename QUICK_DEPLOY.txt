@@ -1,0 +1,37 @@
+🚀 DEPLOY TO RAILWAY IN 3 MINUTES
+======================================
+
+Everything is ready! Just follow these 3 steps:
+
+STEP 1: Push to GitHub (1 minute)
+----------------------------------
+1. Go to https://github.com/new
+2. Create a new repository (name it "TerpMeet")
+3. Run these commands:
+
+   git remote add origin https://github.com/YOUR_USERNAME/TerpMeet.git
+   git push -u origin main
+
+
+STEP 2: Deploy on Railway (1 minute)
+-------------------------------------
+1. Go to https://railway.app (login with GitHub)
+2. Click "New Project" → "Deploy from GitHub repo"
+3. Select "TerpMeet"
+4. Click "Add variables" → Add ONE variable:
+   • NODE_ENV = production
+5. Click "+ New" → "Database" → "Add MongoDB"
+
+
+STEP 3: Get Your URL (30 seconds)
+----------------------------------
+1. Click your service name
+2. Settings → Networking → "Generate Domain"
+3. DONE! Your app is live! 🎉
+
+
+That's it! Your TerpMeet app is deployed!
+Wait 2-3 minutes for the build to complete.
+
+Your live URL will be: https://terpmeet.up.railway.app
+(or similar)
