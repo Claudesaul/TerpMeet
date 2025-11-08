@@ -1,11 +1,11 @@
-import { ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2 } from 'lucide-react';
-import { ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2 } from 'lucide-react';
-import { ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2 } from 'lucide-react';
-import { ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2 } from 'lucide-react';
-  ArrowLeft, Calendar, MapPin, Users, Clock, User, Sparkles, Trash2
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useParams, useNavigate } from 'react-router-dom';
+import {
+  ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2
 } from 'lucide-react';
-import { ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2 } from 'lucide-react';
-import { ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2 } from 'lucide-react';
+import { getEvent, attendEvent, leaveEvent, deleteEvent } from '../services/api';
+import { useUser } from '../context/UserContext';
 import UserTooltip from '../components/UserTooltip';
 
 const EventDetails = () => {
