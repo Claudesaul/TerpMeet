@@ -1,12 +1,9 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
-import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
-import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
-import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
-  Calendar, MapPin, Users, Plus, LogOut, User, Clock,
-  Sparkles, TrendingUp
-} from 'lucide-react';
-import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
-import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
+import { getAllEvents, attendEvent, leaveEvent } from '../services/api';
+import { useUser } from '../context/UserContext';
 import CreateEventModal from '../components/CreateEventModal';
 
 const Dashboard = () => {
