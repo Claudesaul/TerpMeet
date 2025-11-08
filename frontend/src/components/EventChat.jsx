@@ -9,13 +9,19 @@ const EventChat = ({ event, onMessageSent }) => {
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef(null);
+  const prevMessageCount = useRef(0);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
-    scrollToBottom();
+    const currentCount = event?.messages?.length || 0;
+    // Only scroll if there's a NEW message (count increased)
+    if (currentCount > prevMessageCount.current) {
+      scrollToBottom();
+    }
+    prevMessageCount.current = currentCount;
   }, [event?.messages]);
 
   const handleSend = async (e) => {
