@@ -10,6 +10,7 @@ const EventChat = ({ event, onMessageSent }) => {
   const [sending, setSending] = useState(false);
   const messagesEndRef = useRef(null);
   const prevMessageCount = useRef(0);
+  const inputRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -35,6 +36,8 @@ const EventChat = ({ event, onMessageSent }) => {
       if (onMessageSent) {
         onMessageSent(response.data);
       }
+      // Keep focus in input after sending
+      setTimeout(() => inputRef.current?.focus(), 100);
     } catch (err) {
       console.error('Failed to send message:', err);
     } finally {
@@ -123,12 +126,14 @@ const EventChat = ({ event, onMessageSent }) => {
       <form onSubmit={handleSend} className="p-6 border-t border-gray-200">
         <div className="flex gap-2">
           <input
+            ref={inputRef}
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type a message..."
             className="input-field flex-1"
             disabled={sending}
+            autoFocus
           />
           <motion.button
             whileHover={{ scale: 1.05 }}
