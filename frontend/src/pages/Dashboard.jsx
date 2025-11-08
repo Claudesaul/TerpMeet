@@ -5,11 +5,13 @@ import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from '
 import { getAllEvents, attendEvent, leaveEvent } from '../services/api';
 import { useUser } from '../context/UserContext';
 import CreateEventModal from '../components/CreateEventModal';
+import ProfileModal from '../components/ProfileModal';
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const { currentUser, logout } = useUser();
   const navigate = useNavigate();
 
@@ -101,6 +103,15 @@ const Dashboard = () => {
             >
               <Plus className="w-5 h-5" />
               Create Event
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowProfileModal(true)}
+              className="p-3 rounded-xl bg-yellow-50 text-yellow-600 hover:bg-yellow-100 transition-all"
+              title="Edit Profile"
+            >
+              <User className="w-5 h-5" />
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -261,6 +272,15 @@ const Dashboard = () => {
           <CreateEventModal
             onClose={() => setShowCreateModal(false)}
             onEventCreated={loadEvents}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Profile Modal */}
+      <AnimatePresence>
+        {showProfileModal && (
+          <ProfileModal
+            onClose={() => setShowProfileModal(false)}
           />
         )}
       </AnimatePresence>
