@@ -31,5 +31,6 @@ export const updateEvent = (id, eventData) => api.put(`/events/${id}`, eventData
 export const deleteEvent = (id) => api.delete(`/events/${id}`);
 export const attendEvent = (eventId, userId) => api.post(`/events/${eventId}/attend`, { userId });
 export const leaveEvent = (eventId, userId) => api.delete(`/events/${eventId}/attend`, { data: { userId } });
+export const sendMessage = (eventId, userId, text) => api.post(`/events/${eventId}/messages`, { userId, text });
 
 export default api;

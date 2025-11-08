@@ -7,6 +7,7 @@ import {
 import { getEvent, attendEvent, leaveEvent, deleteEvent } from '../services/api';
 import { useUser } from '../context/UserContext';
 import UserTooltip from '../components/UserTooltip';
+import EventChat from '../components/EventChat';
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -17,6 +18,13 @@ const EventDetails = () => {
 
   useEffect(() => {
     loadEvent();
+
+    // Auto-refresh messages every 3 seconds for semi-live updates
+    const interval = setInterval(() => {
+      loadEvent();
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, [id]);
 
   const loadEvent = async () => {
@@ -121,12 +129,15 @@ const EventDetails = () => {
         </div>
       </motion.header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass rounded-3xl p-8 mb-6"
-        >
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left Column - Event Details */}
+          <div className="lg:col-span-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="glass rounded-3xl p-8 mb-6"
+            >
           {/* Event Header */}
           <div className="flex items-start justify-between mb-6">
             <div>
@@ -202,15 +213,15 @@ const EventDetails = () => {
           >
             {isAttending() ? 'Leave Event' : 'Join Event'}
           </motion.button>
-        </motion.div>
+            </motion.div>
 
-        {/* Attendees */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="glass rounded-3xl p-8"
-        >
+            {/* Attendees */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="glass rounded-3xl p-8"
+            >
           <div className="flex items-center gap-2 mb-6">
             <Users className="w-6 h-6 text-red-600" />
             <h3 className="text-xl font-bold text-gray-800">
@@ -268,7 +279,21 @@ const EventDetails = () => {
               ))}
             </div>
           )}
-        </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Right Column - Chat */}
+          <div className="lg:col-span-1">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="sticky top-24 h-[calc(100vh-8rem)]"
+            >
+              <EventChat event={event} onMessageSent={setEvent} />
+            </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );

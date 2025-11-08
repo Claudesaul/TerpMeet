@@ -29,6 +29,7 @@ router.get('/', async (req, res) => {
     const events = await Event.find()
       .populate('creatorId', 'username name avatar majorYear')
       .populate('attendees', 'username name avatar majorYear interests')
+      .populate('messages.userId', 'username name avatar')
       .sort({ time: 1 }); // Sort by time ascending
     res.json(events);
   } catch (err) {
@@ -41,7 +42,8 @@ router.get('/:id', async (req, res) => {
   try {
     const event = await Event.findById(req.params.id)
       .populate('creatorId', 'username name avatar majorYear')
-      .populate('attendees', 'username name avatar majorYear interests');
+      .populate('attendees', 'username name avatar majorYear interests')
+      .populate('messages.userId', 'username name avatar');
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
@@ -137,6 +139,32 @@ router.delete('/:id/attend', async (req, res) => {
     const populatedEvent = await Event.findById(event._id)
       .populate('creatorId', 'username name avatar majorYear')
       .populate('attendees', 'username name avatar majorYear interests');
+    res.json(populatedEvent);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Post a message to an event
+router.post('/:id/messages', async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    const { userId, text } = req.body;
+    if (!userId || !text) {
+      return res.status(400).json({ message: 'userId and text are required' });
+    }
+
+    event.messages.push({ userId, text, timestamp: new Date() });
+    await event.save();
+
+    const populatedEvent = await Event.findById(event._id)
+      .populate('creatorId', 'username name avatar majorYear')
+      .populate('attendees', 'username name avatar majorYear interests')
+      .populate('messages.userId', 'username name avatar');
     res.json(populatedEvent);
   } catch (err) {
     res.status(400).json({ message: err.message });
