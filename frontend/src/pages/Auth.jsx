@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { UserPlus, LogIn, Sparkles, Calendar, Users } from 'lucide-react';
+import { UserPlus, LogIn, Calendar, Users } from 'lucide-react';
 import { createUser, loginUser } from '../services/api';
 import { useUser } from '../context/UserContext';
 
@@ -68,7 +68,7 @@ const Auth = () => {
             rotate: [90, 0, 90],
           }}
           transition={{ duration: 15, repeat: Infinity }}
-          className="absolute bottom-20 right-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+          className="absolute bottom-20 right-20 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70"
         />
       </div>
 
@@ -84,10 +84,10 @@ const Auth = () => {
           transition={{ type: 'spring', bounce: 0.5 }}
           className="text-center mb-8"
         >
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl mb-4 shadow-lg">
-            <Sparkles className="w-10 h-10 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-600 to-yellow-600 rounded-2xl mb-4 shadow-lg">
+            <span className="text-4xl">🐢</span>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-red-600 to-yellow-600 bg-clip-text text-transparent mb-2">
             TerpMeet
           </h1>
           <p className="text-gray-600">Connect. Attend. Make Friends.</p>
@@ -99,8 +99,8 @@ const Auth = () => {
             onClick={() => setIsLogin(true)}
             className={`flex-1 py-3 rounded-lg font-semibold transition-all ${
               isLogin
-                ? 'bg-white shadow-md text-purple-600'
-                : 'text-gray-600 hover:text-purple-600'
+                ? 'bg-white shadow-md text-red-600'
+                : 'text-gray-600 hover:text-red-600'
             }`}
           >
             <LogIn className="inline w-5 h-5 mr-2" />
@@ -110,8 +110,8 @@ const Auth = () => {
             onClick={() => setIsLogin(false)}
             className={`flex-1 py-3 rounded-lg font-semibold transition-all ${
               !isLogin
-                ? 'bg-white shadow-md text-purple-600'
-                : 'text-gray-600 hover:text-purple-600'
+                ? 'bg-white shadow-md text-red-600'
+                : 'text-gray-600 hover:text-red-600'
             }`}
           >
             <UserPlus className="inline w-5 h-5 mr-2" />
@@ -276,11 +276,11 @@ const Auth = () => {
         <div className="mt-8 pt-8 border-t border-gray-200">
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
-              <Calendar className="w-8 h-8 mx-auto text-purple-600 mb-2" />
+              <Calendar className="w-8 h-8 mx-auto text-red-600 mb-2" />
               <p className="text-xs text-gray-600">Join Events</p>
             </div>
             <div>
-              <Users className="w-8 h-8 mx-auto text-pink-600 mb-2" />
+              <Users className="w-8 h-8 mx-auto text-yellow-600 mb-2" />
               <p className="text-xs text-gray-600">Make Friends</p>
             </div>
           </div>

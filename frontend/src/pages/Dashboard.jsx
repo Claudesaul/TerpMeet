@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import {
+import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
+import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
+import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
+import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
   Calendar, MapPin, Users, Plus, LogOut, User, Clock,
   Sparkles, TrendingUp
 } from 'lucide-react';
-import { getAllEvents, attendEvent, leaveEvent } from '../services/api';
-import { useUser } from '../context/UserContext';
+import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
+import { Calendar, MapPin, Users, Plus, LogOut, User, Clock, TrendingUp } from 'lucide-react';
 import CreateEventModal from '../components/CreateEventModal';
 
 const Dashboard = () => {
@@ -68,7 +68,7 @@ const Dashboard = () => {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-          className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full"
+          className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full"
         />
       </div>
     );
@@ -84,11 +84,11 @@ const Dashboard = () => {
       >
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
-              <Sparkles className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-4xl">🐢</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-yellow-600 bg-clip-text text-transparent">
                 TerpMeet
               </h1>
               <p className="text-sm text-gray-600">Welcome, {currentUser.name}!</p>
@@ -130,9 +130,9 @@ const Dashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm font-semibold">Total Events</p>
-                <p className="text-3xl font-bold text-purple-600">{events.length}</p>
+                <p className="text-3xl font-bold text-red-600">{events.length}</p>
               </div>
-              <Calendar className="w-12 h-12 text-purple-600 opacity-50" />
+              <Calendar className="w-12 h-12 text-red-600 opacity-50" />
             </div>
           </motion.div>
 
@@ -145,11 +145,11 @@ const Dashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm font-semibold">Attending</p>
-                <p className="text-3xl font-bold text-pink-600">
+                <p className="text-3xl font-bold text-yellow-600">
                   {events.filter(e => isAttending(e)).length}
                 </p>
               </div>
-              <TrendingUp className="w-12 h-12 text-pink-600 opacity-50" />
+              <TrendingUp className="w-12 h-12 text-yellow-600 opacity-50" />
             </div>
           </motion.div>
 
@@ -162,9 +162,9 @@ const Dashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm font-semibold">Your Profile</p>
-                <p className="text-lg font-bold text-purple-600">{currentUser.majorYear}</p>
+                <p className="text-lg font-bold text-red-600">{currentUser.majorYear}</p>
               </div>
-              <User className="w-12 h-12 text-purple-600 opacity-50" />
+              <User className="w-12 h-12 text-red-600 opacity-50" />
             </div>
           </motion.div>
         </div>
