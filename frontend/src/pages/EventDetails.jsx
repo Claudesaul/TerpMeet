@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2
+  ArrowLeft, Calendar, MapPin, Users, Clock, User, Trash2, Edit
 } from 'lucide-react';
 import { getEvent, attendEvent, leaveEvent, deleteEvent } from '../services/api';
 import { useUser } from '../context/UserContext';
 import UserTooltip from '../components/UserTooltip';
 import EventChat from '../components/EventChat';
+import EditEventModal from '../components/EditEventModal';
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const EventDetails = () => {
   const { currentUser } = useUser();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   useEffect(() => {
     loadEvent();
@@ -151,15 +153,26 @@ const EventDetails = () => {
             </div>
             <div className="flex gap-2">
               {isCreator() && (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleDelete}
-                  className="bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-200 transition-all flex items-center gap-2"
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Delete Event
-                </motion.button>
+                <>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setShowEditModal(true)}
+                    className="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-200 transition-all flex items-center gap-2"
+                  >
+                    <Edit className="w-4 h-4" />
+                    Edit
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleDelete}
+                    className="bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-200 transition-all flex items-center gap-2"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Delete
+                  </motion.button>
+                </>
               )}
               {isAttending() && (
                 <motion.div
@@ -295,6 +308,17 @@ const EventDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Edit Event Modal */}
+      <AnimatePresence>
+        {showEditModal && (
+          <EditEventModal
+            event={event}
+            onClose={() => setShowEditModal(false)}
+            onEventUpdated={setEvent}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
