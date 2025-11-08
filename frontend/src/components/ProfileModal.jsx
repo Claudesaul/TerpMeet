@@ -5,7 +5,7 @@ import { updateUser } from '../services/api';
 import { useUser } from '../context/UserContext';
 
 const ProfileModal = ({ onClose }) => {
-  const { currentUser, setCurrentUser } = useUser();
+  const { currentUser, updateProfile } = useUser();
   const [formData, setFormData] = useState({
     name: currentUser.name || '',
     majorYear: currentUser.majorYear || '',
@@ -29,7 +29,7 @@ const ProfileModal = ({ onClose }) => {
 
     try {
       const response = await updateUser(currentUser._id, formData);
-      setCurrentUser(response.data);
+      updateProfile(response.data);
       onClose();
     } catch (err) {
       setError('Failed to update profile. Please try again.');

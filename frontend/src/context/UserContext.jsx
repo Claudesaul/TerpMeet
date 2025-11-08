@@ -22,8 +22,13 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem('currentUser');
   };
 
+  const updateProfile = (user) => {
+    setCurrentUser(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  };
+
   return (
-    <UserContext.Provider value={{ currentUser, login, logout }}>
+    <UserContext.Provider value={{ currentUser, login, logout, updateProfile }}>
       {children}
     </UserContext.Provider>
   );
